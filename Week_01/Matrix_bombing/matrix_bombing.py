@@ -13,7 +13,7 @@ def main():
         damage = start_weight - damage_of(point, m)
         if damage >= max_damage:
             max_damage = damage
-        points_damage[point] = damage 
+        points_damage[point] = damage
     print(points_damage)
 
 

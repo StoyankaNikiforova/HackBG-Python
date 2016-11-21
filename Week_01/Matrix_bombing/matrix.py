@@ -11,11 +11,9 @@ class Matrix:
         matrix = []
         for i in range(self.rows):
             input_row = input("Enter matrix row: ").split(' ')
-            # row = []
             for j in range(self.cols):
                 point = Point(i, j, int(input_row[j]))
                 matrix.append(point)
-            # matrix.append(row)
         return matrix
 
     def get_point_by_poss(self, x, y):
