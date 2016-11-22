@@ -75,17 +75,18 @@ print(goldbach(100))
 
 
 def is_credit_card_valid(number):
-    lenght = len("".join(reversed(str(number))))
-    print("".join(reversed(str(number))))
+    reversed_num = "".join(reversed(str(number)))
+    lenght = len(reversed_num)
     summ = 0
     is_valid = False
     for i in range(0, lenght, 2):
-        summ = summ + int(str(number)[i])
+        summ = summ + int((reversed_num)[i])
+        print(reversed_num[i])
     for i in range(1, lenght, 2):
-        summ = summ + (int(str(number)[i]) * 2)
+        print(reversed_num[i])
+        summ = summ + (int(reversed_num[i]) * 2)
     if summ % 10 == 0 and lenght % 2 != 0:
         is_valid = True
-    print(summ)
     return is_valid
 
 print(is_credit_card_valid(79927398713))
