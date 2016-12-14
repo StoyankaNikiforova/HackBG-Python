@@ -73,7 +73,6 @@ def goldbach(n):
     return sum_tuples
 print(goldbach(100))
 
-
 def is_credit_card_valid(number):
     reversed_num = "".join(reversed(str(number)))
     lenght = len(reversed_num)
@@ -81,10 +80,9 @@ def is_credit_card_valid(number):
     is_valid = False
     for i in range(0, lenght, 2):
         summ = summ + int((reversed_num)[i])
-        print(reversed_num[i])
     for i in range(1, lenght, 2):
-        print(reversed_num[i])
-        summ = summ + (int(reversed_num[i]) * 2)
+        transform_num = int(reversed_num[i]) * 2
+        summ = summ + (transform_num // 10) + (transform_num % 10)
     if summ % 10 == 0 and lenght % 2 != 0:
         is_valid = True
     return is_valid
