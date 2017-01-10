@@ -18,4 +18,4 @@ class Client():
         return self.__message
 
     def set_message(self, new_message):
-self.__message = new_message
+        self.__message = new_message

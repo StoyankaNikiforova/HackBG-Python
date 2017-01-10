@@ -1,9 +1,7 @@
 import sys
 import unittest
 import os
-
 sys.path.append("..")
-
 import sql_manager
 
 
@@ -51,4 +49,4 @@ class SqlManagerTests(unittest.TestCase):
         self.assertEqual(logged_user_new_password.get_username(), 'Tester')
 
 if __name__ == '__main__':
-unittest.main()
+    unittest.main()
