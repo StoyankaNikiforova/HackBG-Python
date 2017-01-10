@@ -1,4 +1,5 @@
 import sql_manager
+from settings import HELP_MESSAGE
 
 
 def main_menu():
@@ -59,14 +60,10 @@ def logged_menu(logged_user):
             print(logged_user.get_message())
 
         elif command == 'help':
-            print("info - for showing account info")
-            print("changepass - for changing passowrd")
-            print("change-message - for changing users message")
-            print("show-message - for showing users message")
+            print(HELP_MESSAGE)
 
 
 def main():
-    sql_manager.create_clients_table()
     main_menu()
 
 if __name__ == '__main__':
