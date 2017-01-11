@@ -1,9 +1,9 @@
 import sql_manager
-from settings import HELP_MESSAGE
+from settings import HELP_MESSAGE, WELCOME_MESSAGE
 
 
 def main_menu():
-    print("Welcome to our bank service. You are not logged in. \nPlease register or login")
+    print(WELCOME_MESSAGE)
 
     while True:
         command = input("$$$>")
@@ -48,7 +48,7 @@ def logged_menu(logged_user):
             print("Your id is: " + str(logged_user.get_id()))
             print("Your balance is:" + str(logged_user.get_balance()) + '$')
 
-        elif command == 'changepass':
+        elif command == 'change-pass':
             new_pass = input("Enter your new password: ")
             sql_manager.change_pass(new_pass, logged_user)
 
