@@ -16,7 +16,9 @@ WELCOME_MESSAGE = '''Welcome to our bank service!!!
                     [help] - for help,
                     [exit] - for exit'''
 
-WELCOME_SWITCHER = {'register': register, 'login': login, 'help': welcome_help, 'exit': exit}
+VALID_COMMANDS_WELCOME = ['register', 'login', 'help', 'exit']
+
+WELCOME_SWITCHER = {'register': get_register_credentials, 'login': get_login_credentials, 'help': welcome_help, 'exit': exit}
 
 USER_MESSAGE = '''Welcome {}!!!
                     Please enter:
@@ -24,6 +26,7 @@ USER_MESSAGE = '''Welcome {}!!!
                     [edit] - to edit your profile,
                     [help] - for help'''
 
+VALID_COMMANDS_USER = ['info', 'edit', 'help', 'exit']
 USER_SWITCHER = {'info': info, 'edit': edit, 'help': user_help, 'exit': exit}
 
 INFO_MESSAGE = '''Welcome you are logged in as: {},
@@ -36,4 +39,7 @@ EDIT_MESSAGE = '''You  to change your:
                 [message] or [password]
                 Please enter keyword: '''
 
+VALID_COMMANDS_EDIT = ['message', 'password']
 EDIT_SWITCHER = {'message': change_message, 'password': change_pass}
+
+NOT_VALID_MESSAGE = 'Not a valid command'
