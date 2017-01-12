@@ -13,7 +13,7 @@ class testPanda(unittest.TestCase):
         self.assertEqual(self.p.to_xml(), "<>")
 
     def test_from_xml(self):
-        self.assertEqual(self.p.from_xml(self.p.to_xml), "")    
+        self.assertEqual(Panda.from_xml(self.p.to_xml()), "")    
 
 
 if __name__ == '__main__':
