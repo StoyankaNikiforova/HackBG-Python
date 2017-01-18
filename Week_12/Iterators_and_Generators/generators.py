@@ -1,4 +1,5 @@
 from random import randint
+import sys, tty, termios
 
 
 def chain(iterable_one, iterable_two):
@@ -27,40 +28,67 @@ def get_file(folder):
             yield f
 
 
-def print_chapter(folder):
+def chapter_generator(folder):
     import re
     for i in get_file(folder):
         ffile = i
 
-        pattern = '\#[\w\d!;,?]*'
-
         with open(folder+"/"+ffile, 'r') as f:
             read_data = f.read()
-            print(read_data)
             chaprers = re.split('#', read_data)
             for ch in chaprers:
                 yield ch
 
 
-def word_generator():
-    word = ""
-    for a in range(randint(5, 50)):
-        char = chr(randint(32, 126))
-        word += char
-    yield word
+def word_generator(chapter_lenght):
+    words = ' '
+    for i in range(chapter_lenght):
+        word = ''
+        for a in range(randint(1, 30)):
+            char = chr(randint(33, 126))
+            word += char
+        words += ' {}'.format(word)
+    yield words
+
+
+def chapter_writer(chapter_lenght):
+    chapter = []
+    words = word_generator(chapter_lenght)
+    for word in words:
+        chapter.append(word)
+    yield chapter
+
+
+def getch():
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    try:
+        tty.setraw(sys.stdin.fileno())
+        ch = sys.stdin.read(1)
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+    return ch
+
+
+def book_reader():
+    ss = chapter_generator("Book")
+    for i in ss:
+        print("Press Space to get chapter...")
+        key = getch()
+        print(key)
+        if key == ' ':
+            print(i)
 
 
 def book_generator(chapter_count=4, chapter_lenght=1500):
     book_text = ""
-    for a in range(chapter_count):
-        book_text += "Capter {}\n".format(a)
-        words = word_generator()
+    for a in range(1, chapter_count+1):
+        book_text += "\n\nCapter {}\n".format(a)
+        chapters = chapter_writer(chapter_lenght)
+        for chapter in chapters:
+            book_text += "  {}".format(chapter)
 
-        for w in range(chapter_lenght):
-            for word in words:
-                book_text += " {}".format(word)
-
-    return book_text
+    yield book_text
 
 
 def main():
@@ -71,16 +99,13 @@ def main():
     for item in endless:
         print(item)
 
-    book = book_generator()
+    book_reader()
+
+    book = book_generator(10, 20)
     for i in book:
         print(i)
 
 
-    ss = print_chapter("Book")
-    for i in ss:
-        key = input("Press Space to get chapter...")
-        if key == ' ':
-            print(i)
 
 
 
