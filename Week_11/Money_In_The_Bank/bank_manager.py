@@ -1,31 +1,37 @@
+import sql_manager
 from getpass import getpass
 from settings import *
+from validators import *
 
 
-@command_valitation(VALID_COMMANDS_WELCOME)
+@command_valitation('register', 'login', 'help', 'exit')
 def welcome_switcher(user_command):
-    return WELCOME_SWITCHER[user_command]()
+    command = user_command
+    WELCOME_SWITCHER = {"register": get_register_credentials, 'login': get_login_credentials, 'helpp': welcome_help, 'exit': exit}
+    return WELCOME_SWITCHER[command]()
 
 
 def welcome():
     print(WELCOME_MESSAGE)
     user_command = input(INP_STR)
-    welcome_switcher(user_command)
+    return (welcome_switcher(user_command))
 
 
 def get_register_credentials():
     username = input("Enter your username: ")
     password = getpass("Enter your password: ")
-    register(username, password)
+    if username in password:
+        raise ValueError("Password can't contain username!")
+        password = getpass("Enter your password: ")
+    sql_manager.register(username, password)
 
 
-@validate_pass()
-def register(username, password):
-    pass
-
-
-@command_valitation(VALID_COMMANDS_USER)
+@command_valitation('info', 'edit', 'help', 'exit')
 def user_switcher(user_command):
+    USER_SWITCHER = {'info': info,
+                     'edit': edit,
+                     'help': user_help,
+                     'exit': exit}
     return USER_SWITCHER[user_command]()
 
 
@@ -36,7 +42,8 @@ def get_login_credentials():
 
 
 @verify_pass()
-def login(logged_user, password):
+def login(username, password):
+    user = sql_manager.get_user(username, password)
     username = logged_user.get_username
     print(USER_MESSAGE.format(username))
     user_command = input(INP_STR)
@@ -58,8 +65,10 @@ def info(logged_user):
     print(INFO_MESSAGE.format(username, balance, message))
 
 
-@command_valitation(VALID_COMMANDS_EDIT)
+@command_valitation('message', 'password')
 def edit_switcher(user_command):
+    EDIT_SWITCHER = {'message': change_message,
+                     'password': change_pass}
     return EDIT_SWITCHER[user_command]()
 
 

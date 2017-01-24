@@ -1,6 +1,8 @@
 import sqlite3
 from client import Client
 from settings import DB_NAME
+from validators import validate_pass
+from queries import *
 
 
 conn = sqlite3.connect(DB_NAME)
@@ -18,13 +20,20 @@ def change_pass(new_pass, logged_user):
     conn.commit()
 
 
+# @encrypt_pass()
+@validate_pass()
+def set_pass(password):
+    return password
+
+
 def register(username, password):
-    cursor.execute(INSERT_INTO_CLIENT)
+    password = set_pass(password)
+    cursor.execute(INSERT_INTO_CLIENT, (username, password))
     conn.commit()
 
 
-def login(username, password):
-    cursor.execute(GET_CLIENT_FROM_DB)
+def get_user(username, password):
+    cursor.execute(GET_CLIENT_FROM_DB, (username, password))
     user = cursor.fetchone()
 
     if(user):

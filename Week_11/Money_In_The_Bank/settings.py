@@ -1,13 +1,16 @@
+# from bank_manager import (info, edit, get_login_credentials, get_register_credentials, welcome,
+#                             exit, user_help, change_pass, change_message, )
+
 DB_NAME = 'BANK.db'
 
-INP_STR = '$$$> '
+INP_STR = '$$$>'
 INP_STR_CHANGE_PASS = 'Enter your new password: '
 INP_STR_CHANGE_MESSAGE = 'Enter your new message: '
 
 HELP_MESSAGE = '''[info]- for showing account info,
                   [edit] - for changing passowrd or message'''
 
-HELP_USER_SWITCHER = {'info': info, 'edit': edit}
+# HELP_USER_SWITCHER = {'info': info, 'edit': edit}
 
 WELCOME_MESSAGE = '''Welcome to our bank service!!!
                     Please enter:
@@ -18,7 +21,6 @@ WELCOME_MESSAGE = '''Welcome to our bank service!!!
 
 VALID_COMMANDS_WELCOME = ['register', 'login', 'help', 'exit']
 
-WELCOME_SWITCHER = {'register': get_register_credentials, 'login': get_login_credentials, 'help': welcome_help, 'exit': exit}
 
 USER_MESSAGE = '''Welcome {}!!!
                     Please enter:
@@ -27,7 +29,6 @@ USER_MESSAGE = '''Welcome {}!!!
                     [help] - for help'''
 
 VALID_COMMANDS_USER = ['info', 'edit', 'help', 'exit']
-USER_SWITCHER = {'info': info, 'edit': edit, 'help': user_help, 'exit': exit}
 
 INFO_MESSAGE = '''Welcome you are logged in as: {},
 Your ID is: {},
@@ -40,6 +41,11 @@ EDIT_MESSAGE = '''You  to change your:
                 Please enter keyword: '''
 
 VALID_COMMANDS_EDIT = ['message', 'password']
-EDIT_SWITCHER = {'message': change_message, 'password': change_pass}
 
 NOT_VALID_MESSAGE = 'Not a valid command'
+
+WRONG_VALUE = '''The password must have More then 8 symbols,
+                    capital letters, and numbers,
+                    and a special symbol'''
+
+PASS_REG = '[\d{1,}(\W{1,})(\D)]{8,}'                   
