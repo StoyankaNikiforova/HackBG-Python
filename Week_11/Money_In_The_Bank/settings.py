@@ -1,6 +1,3 @@
-# from bank_manager import (info, edit, get_login_credentials, get_register_credentials, welcome,
-#                             exit, user_help, change_pass, change_message, )
-
 DB_NAME = 'BANK.db'
 
 INP_STR = '$$$>'
@@ -9,8 +6,6 @@ INP_STR_CHANGE_MESSAGE = 'Enter your new message: '
 
 HELP_MESSAGE = '''[info]- for showing account info,
                   [edit] - for changing passowrd or message'''
-
-# HELP_USER_SWITCHER = {'info': info, 'edit': edit}
 
 WELCOME_MESSAGE = '''Welcome to our bank service!!!
                     Please enter:
@@ -48,4 +43,4 @@ WRONG_VALUE = '''The password must have More then 8 symbols,
                     capital letters, and numbers,
                     and a special symbol'''
 
-PASS_REG = '[\d{1,}(\W{1,})(\D)]{8,}'                   
+PASS_REG = '[\d{1,}(\W{1,})(\D)]{8,}'               

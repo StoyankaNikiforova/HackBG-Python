@@ -27,5 +27,4 @@ INSERT_INTO_CLIENT = '''INSERT INTO CLIENT(USERNAME, PASSWORD)
 
 GET_CLIENT_FROM_DB = '''SELECT *
                         FROM CLIENT
-                        WHERE USERNAME = ? AND PASSWORD = ?
-                        LIMIT 1'''
+                        WHERE USERNAME = ?'''

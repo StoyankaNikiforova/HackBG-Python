@@ -2,6 +2,7 @@ import sql_manager
 from getpass import getpass
 from settings import *
 from validators import *
+from client import Client
 
 
 @command_valitation('register', 'login', 'help', 'exit')
@@ -38,14 +39,18 @@ def user_switcher(user_command):
 def get_login_credentials():
     username = input("Enter your username: ")
     password = getpass("Enter your password: ")
-    login(user, password)
+    login(username, password)
 
 
-@verify_pass()
+@verify_user()
+def create_user(username, password):
+    return False
+
+
 def login(username, password):
-    user = sql_manager.get_user(username, password)
-    username = logged_user.get_username
-    print(USER_MESSAGE.format(username))
+    # user = create_user(username, password)
+    user = sql_manager.get_user(username)
+    print(USER_MESSAGE.format(user.username))
     user_command = input(INP_STR)
     user_switcher(user_command)
 

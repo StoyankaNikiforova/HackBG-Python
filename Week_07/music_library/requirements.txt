@@ -1,2 +1,0 @@
-python==3.5.2
-tabulate==0.7.7

@@ -7,7 +7,6 @@ def main_menu():
     bank_manager.welcome()
 
 
-
 def main():
     main_menu()
 

@@ -1,6 +1,9 @@
+import hashlib
+import uuid
 from settings import *
 from functools import wraps
 import re
+import sql_manager
 
 
 def command_valitation(*commands):
@@ -29,32 +32,28 @@ def validate_pass():
     return wrapper
 
 
-# def validate_pass(password):
-#     pattern = PASS_REG
-#     result = re.match(pattern, password)
-#     if not result:
-#         raise ValueError(WRONG_VALUE)
-#     else:
-#         return password
-
-# def encrypt_pass():
-    # def wrapper(func):
-    #     @wraps(func)
-    #     def cheker(arg):
-    #         pass
-    #     return cheker
-    # return wrapper
-    #
-
-
-
-
-
-def verify_pass(*commands):
+def encrypt_pass():
     def wrapper(func):
-        # @wraps
-        def cheker(arg):
-            if arg not in commands:
-                pass
+        @wraps(func)
+        def cheker(password):
+            salt = uuid.uuid4().hex
+            hashed_pass = hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+            return hashed_pass
+        return cheker
+    return wrapper
+
+
+def verify_user():
+    def wrapper(func):
+        @wraps(func)
+        def cheker(username, password):
+            user = sql_manager.get_user(username)
+            if not user:
+                raise ValueError("No such user in system")
+            salt = uuid.uuid4().hex
+            hashed_pass = hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+            if hashed_pass != user.password:
+                raise ValueError(WRONG_VALUE)
+            return user
         return cheker
     return wrapper

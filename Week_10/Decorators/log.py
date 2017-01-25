@@ -7,7 +7,7 @@ def log(file_name):
     def loged_func(func):
         import logging
         logging.basicConfig(filename=file_name, level=logging.INFO)
-
+        
         @wraps(func)
         def writer():
             import time
