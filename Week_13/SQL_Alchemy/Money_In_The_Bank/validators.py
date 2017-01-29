@@ -18,29 +18,23 @@ def command_valitation(*commands):
     return wrapper
 
 
-def validate_pass():
-    def wrapper(func):
-        @wraps(func)
-        def cheker(ps):
-            pattern = PASS_REG
-            result = re.match(pattern, ps)
-            if result:
-                return ps
-            else:
-                print(WRONG_VALUE)
-        return cheker
-    return wrapper
+def validate_pass(func):
+    def cheker(ps):
+        pattern = PASS_REG
+        result = re.match(pattern, ps)
+        if result:
+            return func(ps)
+        else:
+            raise ValueError(WRONG_VALUE)
+    return cheker
 
 
-def encrypt_pass():
-    def wrapper(func):
-        @wraps(func)
-        def cheker(password):
-            salt = uuid.uuid4().hex
-            hashed_pass = hashlib.sha256(salt.encode() + password.encode()).hexdigest()
-            return hashed_pass
-        return cheker
-    return wrapper
+def encrypt_pass(func):
+    def cheker(password):
+        salt = uuid.uuid4().hex
+        hashed_pass = hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+        return func(hashed_pass)
+    return cheker
 
 
 def verify_user():

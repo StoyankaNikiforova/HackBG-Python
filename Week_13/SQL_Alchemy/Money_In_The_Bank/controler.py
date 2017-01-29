@@ -20,8 +20,8 @@ def edit_pass(new_pass, logged_user):
     session.commit()
 
 
-@encrypt_pass()
-@validate_pass()
+@encrypt_pass
+@validate_pass
 def set_pass(password):
     return password
 
