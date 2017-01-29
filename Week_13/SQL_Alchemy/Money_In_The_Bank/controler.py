@@ -21,6 +21,7 @@ def edit_pass(new_pass, logged_user):
 
 
 @encrypt_pass()
+@validate_pass()
 def set_pass(password):
     return password
 
