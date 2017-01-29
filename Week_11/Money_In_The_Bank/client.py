@@ -1,4 +1,4 @@
-class Client():
+    class Client():
     def __init__(self, client_id, username, balance, message):
         self.__username = username
         self.__balance = balance

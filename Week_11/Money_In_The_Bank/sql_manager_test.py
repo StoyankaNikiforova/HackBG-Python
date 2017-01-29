@@ -11,13 +11,6 @@ class SqlManagerTests(unittest.TestCase):
         sql_manager.create_clients_table()
         sql_manager.register('Tester', '123')
 
-    # def tearDown(self):
-    #     sql_manager.cursor.execute('DROP TABLE clients')
-    #
-    # @classmethod
-    # def tearDownClass(cls):
-    #     os.remove("bank.db")
-
     def test_register(self):
         sql_manager.register('Dinko', '123123')
 
