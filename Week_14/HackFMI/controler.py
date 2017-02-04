@@ -13,11 +13,6 @@ def get_data(url):
     return response.json()
 
 
-# def fill_row(class_name, **filds):
-#     session.add(exec("{}({})".format(class_name, filds)))
-#     session.commit()
-#     return True
-
 def fill_skill_table():
     all_data = get_data(URL_SKILLS)
     for skill_data in all_data:
@@ -26,32 +21,41 @@ def fill_skill_table():
         session.add(skill)
         session.commit()
 
+def fill_team_table():
+    all_data = get_data(URL_TEAMS)
+    for team_data in all_data:
+        name = team_data['name']
+        idea_description = team_data['idea_description']
+        repository = team_data['repository']
+        need_more_members = team_data['need_more_members']
+        members_needed_desc = team_data['members_needed_desc']
+        room = team_data['room']
+        place = team_data['place']
+        data_row = Mentor(name=name, idea_description=idea_description,
+                          repository=repository, need_more_members=need_more_members,
+                          members_needed_desc=members_needed_desc, room=room, place=place
+                          )
+        session.add(data_row)
+        session.commit()
 
-# def fill_team_table():
-#     all_data = get_data(URL_TEAMS)
-#     for team_data in all_data:
-#         name = team_data['name']
-#         description = mentor_data['description']
-#         picture = mentor_data['picture']
-#         data_row = Mentor(name=name, description=description, picture=picture, teams=teams)
-#         session.add(data_row)
-#         session.commit()
 
-
-# def fill_mentors_table():
-#     all_data = get_data(URL_MENTORS)
-#     for mentor_data in all_data:
-#         teams = session.query(Team).filter(Team.mentor == mentor_data['id'])
-#         name = mentor_data['name']
-#         description = mentor_data['description']
-#         picture = mentor_data['picture']
-#         data_row = Mentor(name=name, description=description, picture=picture, teams=teams)
-#         session.add(data_row)
-#         session.commit()
+def fill_mentors_table():
+    all_data = get_data(URL_MENTORS)
+    for mentor_data in all_data:
+        name = mentor_data['name']
+        description = mentor_data['description']
+        picture = mentor_data['picture']
+        data_row = Mentor(name=name, description=description, picture=picture)
+        session.add(data_row)
+        session.commit()
 
 
 def main():
-    fill_skill_table()
+    # fill_skill_table()
+    fill_mentors_table()
+
+    fill_team_table()
+
 
 
 if __name__ == '__main__':

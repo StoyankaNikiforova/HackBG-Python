@@ -40,7 +40,7 @@ class Team(Base):
     need_more_members = Column(Boolean, unique=False, default=True)
     members_needed_desc = Column(String, nullable=False)
     room = Column(Integer, nullable=False)
-    place = Column(String, default=None)
+    place = Column(String, nullable=True)
 
 
 class Skills(Base):
