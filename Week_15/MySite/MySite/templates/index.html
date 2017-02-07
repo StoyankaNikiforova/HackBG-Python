@@ -1,0 +1,103 @@
+<html>
+  <head>
+    <title>CS Grad Helper</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        width: 800px;
+        margin:auto;
+      }
+
+      .float-container:after {
+        content:"";
+        display:block;
+        clear:both;
+      }
+
+      .form-container {
+        margin:10px;
+        padding:10px;
+        border: 1px solid grey;
+      }
+
+      .col-4 {
+        margin-left: 2px;
+        margin-right: 2px;
+        width: 33%;
+        float:left;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="float-container">
+      <div class="col-4" id="factorial_container">
+        <div class="form-container">
+          <form action="{%url 'factorial'%}", method="post">
+            {% csrf_token %}
+            <p>Calculate n!</p>
+            <label>Enter n:</label>
+            <input type="number" name="factorial"/>
+            <input type="submit" value="Go!" />
+            <p>Result is : {{fact}}</p>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-4" id="fibonacci_container">
+      <div class="form-container">
+          <form action="{%url 'fibonaci'%}", method="post">
+            {% csrf_token %}
+            <p>Find nth fibonacci.</p>
+            <label>Enter n:</label>
+            <input type="number" name="fibonacci"/>
+            <input type="submit" value="Go!" />
+            <p>Result is: {{fibonacci_nums}} </p>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-4" id="primes_container">
+        <div class="form-container">
+          <form method="POST" action="{%url 'primes'%}">
+            {% csrf_token %}
+            <p>List first n prime numbers.</p>
+            <label>Enter n:</label>
+            <input type="number" name='prime' />
+            <input type="submit" value="Go!" />
+            <p>Result is: {{ primes }}</p>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-4" id="rle_container">
+        <div class="form-container">
+          <form method="POST" action="{%url 'encode'%}">
+              {% csrf_token %}
+            <p>Encode <a href="https://en.wikipedia.org/wiki/Run-length_encoding">RLE.</a></p>
+            <label>Enter string:</label>
+            <input type="text" name="text_for_encode"/>
+            <input type="submit" value="Go!" />
+            <p>RLE is: {{encode_str}}</p>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-4" id="some_container">
+        <div class="form-container">
+          <form method="POST" action="{%url 'decode'%}">
+              {% csrf_token %}
+            <p>Decode <a href="https://en.wikipedia.org/wiki/Run-length_encoding">RLE.</a></p>
+            <label>Enter RLE string:</label>
+            <input type="text" name="encoded_text"/>
+            <input type="submit" value="Go!" />
+            <p>Decoded string is:  {{ string_text }}</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
